@@ -43,7 +43,12 @@ func main() {
 func Migrate(db *sql.DB) {
 	registeredMigrations := migrations.GetMigrations()
 
+	maxNameLength := 31
+
 	fmt.Printf("Found %d migrations to run\n", len(registeredMigrations))
+	fmt.Println("┌────────────────────────────────┬──────────────────┐")
+	fmt.Println("│              NAME              │       STATUS     │")
+	fmt.Println("├────────────────────────────────┼──────────────────┤")
 
 	for _, m := range registeredMigrations {
 		var exist bool
@@ -57,7 +62,6 @@ func Migrate(db *sql.DB) {
 		if !exist {
 			t, err := db.Begin()
 
-			fmt.Printf("Running migration: %s...\n", m.Name())
 			err = m.Up(db)
 
 			if err != nil {
@@ -81,10 +85,12 @@ func Migrate(db *sql.DB) {
 				log.Fatalf(err.Error())
 			}
 
-			fmt.Printf("migrate %s finished successfully\n", m.Name())
+			//fmt.Printf("%s - OK\n", m.Name())
+			fmt.Printf("│ %-*s│         %s       │\n", maxNameLength, m.Name(), "OK")
 		}
 
 	}
+	fmt.Println("└────────────────────────────────┴──────────────────┘")
 
 	fmt.Println("All migrations completed.")
 }
