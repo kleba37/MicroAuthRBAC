@@ -8,4 +8,4 @@ test:
 	go test ./tests/*/**
 
 migrate:
-	go run ./cmd/Migrate/main.go -mod=vendor
+	go run ./cmd/migrate/main.go -mod=vendor
