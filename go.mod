@@ -1,10 +1,11 @@
 module go-test
 
-go 1.25
+go 1.25.4
 
 require (
 	github.com/joho/godotenv v1.5.1
-	modernc.org/sqlite v1.39.1
+	github.com/kleba37/GoServiceContainer v0.0.6
+	modernc.org/sqlite v1.40.0
 )
 
 require (

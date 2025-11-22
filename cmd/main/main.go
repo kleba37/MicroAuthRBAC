@@ -3,12 +3,13 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"go-test/internal/DI"
 	"go-test/pkg/Router"
 	"go-test/pkg/middleware"
 	"go-test/pkg/middleware/CustomMiddleware"
 	"net/http"
 	"os"
+
+	DI "github.com/kleba37/GoServiceContainer"
 
 	"github.com/joho/godotenv"
 )
@@ -21,7 +22,7 @@ func main() {
 
 	db := &sql.DB{}
 
-	di := (&DI.DI{}).New()
+	di := DI.New()
 	di.Register(db)
 
 	httpHandler := http.HandlerFunc(Router.Router{Container: di}.Router)

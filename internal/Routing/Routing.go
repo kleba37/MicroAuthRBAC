@@ -2,8 +2,9 @@ package Routing
 
 import (
 	"go-test/api/Controllers"
-	"go-test/pkg/Container"
 	"net/http"
+
+	"github.com/kleba37/GoServiceContainer/pkg/Container"
 )
 
 func MakeRouteMap(container *Container.Container) map[string]http.HandlerFunc {

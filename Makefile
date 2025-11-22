@@ -4,8 +4,8 @@ run:
 build:
 	go build ./cmd/main/main.go -mod=vendor
 
-tests:
-	go test ./tests/*/*
+test:
+	go test ./tests/*/**
 
 migrate:
 	go run ./cmd/Migrate/main.go -mod=vendor

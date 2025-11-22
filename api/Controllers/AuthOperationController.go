@@ -6,8 +6,9 @@ import (
 	MessageResponses "go-test/api/Responses"
 	"go-test/internal/DTO"
 	"go-test/internal/model"
-	"go-test/pkg/Container"
 	"net/http"
+
+	"github.com/kleba37/GoServiceContainer/pkg/Container"
 
 	_ "modernc.org/sqlite"
 )
@@ -21,14 +22,22 @@ func (h AuthOperationController) Handler(rw http.ResponseWriter, req *http.Reque
 	err := json.NewDecoder(req.Body).Decode(dto)
 
 	if err != nil {
-		// Can't decode JSON, bad request
 		rw.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	ser := sql.DB{}
-	s := h.Container.Get(&ser)
-	db := (*s).(*sql.DB)
+	ser := &sql.DB{}
+	s, err := h.Container.Get(ser)
+
+	if err != nil {
+		rw.WriteHeader(http.StatusInternalServerError)
+	}
+
+	db, ok := (*s).(*sql.DB)
+
+	if !ok {
+		rw.WriteHeader(http.StatusInternalServerError)
+	}
 
 	row := db.QueryRow("SELECT id, name, email, token FROM users WHERE token = ?", dto.Token)
 

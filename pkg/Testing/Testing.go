@@ -3,7 +3,6 @@ package TestingTools
 import (
 	"database/sql"
 	"go-test/database/migrations"
-	"go-test/internal/DI"
 	"go-test/pkg/Router"
 	Middleware "go-test/pkg/middleware"
 	"go-test/pkg/middleware/CustomMiddleware"
@@ -13,6 +12,8 @@ import (
 	"github.com/joho/godotenv"
 	// Пустой импорт нужен, чтобы сработали init() функции в файлах миграций
 	_ "go-test/database/migrations"
+
+	DI "github.com/kleba37/GoServiceContainer"
 )
 
 type TestingTools struct {
@@ -39,7 +40,7 @@ func New() (*TestingTools, error) {
 		}
 	}
 
-	di := (&DI.DI{}).New()
+	di := DI.New()
 	di.Register(db)
 
 	httpHandler := http.HandlerFunc(Router.Router{Container: di}.Router)

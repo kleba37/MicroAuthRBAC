@@ -2,8 +2,10 @@ package Router
 
 import (
 	"go-test/internal/Routing"
-	"go-test/pkg/Container"
+	//"go-test/internal/Routing"
 	"net/http"
+
+	"github.com/kleba37/GoServiceContainer/pkg/Container"
 )
 
 type Router struct {

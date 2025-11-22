@@ -3,8 +3,9 @@ package Controllers
 import (
 	"encoding/json"
 	MessageResponses "go-test/api/Responses"
-	"go-test/pkg/Container"
 	"net/http"
+
+	"github.com/kleba37/GoServiceContainer/pkg/Container"
 )
 
 type MainController struct {
