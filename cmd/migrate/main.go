@@ -43,7 +43,7 @@ func main() {
 func Migrate(db *sql.DB) {
 	registeredMigrations := migrations.GetMigrations()
 
-	maxNameLength := 31
+	maxNameLength := 30
 
 	fmt.Printf("Found %d migrations to run\n", len(registeredMigrations))
 	fmt.Println("┌────────────────────────────────┬──────────────────┐")
@@ -86,7 +86,7 @@ func Migrate(db *sql.DB) {
 			}
 
 			//fmt.Printf("%s - OK\n", m.Name())
-			fmt.Printf("│ %-*s│         %s       │\n", maxNameLength, m.Name(), "OK")
+			fmt.Printf("│ %-*s │         %s       │\n", maxNameLength, m.Name(), "OK")
 		}
 
 	}
